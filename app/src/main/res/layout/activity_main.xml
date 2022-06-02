@@ -7,12 +7,57 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/ed_learning_hours"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="120dp"
+        android:layout_marginEnd="40dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_learning_hours"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Hello World!"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
+        android:textSize="22sp"
+        android:text="@string/hours_learned_string"
+        app:layout_constraintBaseline_toBaselineOf="@id/ed_learning_hours"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        android:layout_marginStart="40dp"
+        />
+
+    <TextView
+        android:id="@+id/tv_hours_per_day"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/hours_per_day"
+        android:textSize="22sp"
+        app:layout_constraintTop_toBottomOf="@id/tv_learning_hours"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="@id/tv_learning_hours"
+        />
+
+    <TextView
+        android:id="@+id/tx_hours_per_day"
+        android:layout_width="80dp"
+        android:layout_height="wrap_content"
+        android:textSize="22sp"
+        app:layout_constraintStart_toStartOf="@id/ed_learning_hours"
+        app:layout_constraintTop_toBottomOf="@id/ed_learning_hours"
+        app:layout_constraintBaseline_toBaselineOf="@id/tv_hours_per_day"
+        />
+
+    <Button
+        android:id="@+id/bt_add_learning_hour"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/add_learning_hour"
+        app:layout_constraintTop_toBottomOf="@id/tv_hours_per_day"
+        android:layout_marginTop="60dp"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginStart="40dp"
+        />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
