@@ -14,7 +14,7 @@ object ItemListRepositoryImpl: ItemListRepository {
 
     init {
         for (i in 0 until 50){
-            val item = Item("Item $i")
+            val item = Item("Item $i", i)
             addItem(item)
         }
     }
@@ -24,13 +24,19 @@ object ItemListRepositoryImpl: ItemListRepository {
             item.id = autoIncrementedId++
         }
         itemList.add(item)
+        updateList()
     }
 
     override fun deleteItem(item: Item) {
         itemList.remove(item)
+        updateList()
     }
 
     override fun getItemList(): LiveData<List<Item>> {
         return itemListLD
+    }
+
+    private fun updateList(){
+        itemListLD.value = itemList.toList()
     }
 }

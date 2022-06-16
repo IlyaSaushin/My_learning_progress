@@ -1,6 +1,8 @@
 package com.learningApp.myapplication.presentation
 
 import android.content.ClipData
+import android.text.Layout
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,15 +13,13 @@ import com.learningApp.myapplication.domain.Item
 
 class RVAdapter: RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
 
+    var count = 0
     private var authID = 0
-    private val itemList = mutableListOf<Item>()
-
-    init {
-        for (i in 1 until 30){
-            val item = Item("Name $i", authID++)
-            itemList.add(item)
+    var itemList = listOf<Item>()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
         }
-    }
 
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
@@ -27,7 +27,9 @@ class RVAdapter: RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_design, parent, false)
+        Log.d("onCreateVH", "${++count}")
+        val view = LayoutInflater.from(parent.context).inflate(
+            R.layout.item_design, parent, false)
         return ItemViewHolder(view)
     }
 

@@ -9,25 +9,25 @@ import com.learningApp.myapplication.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity() {
 
-    lateinit var binding: ActivityMainBinding
-    lateinit var viewModel: MainViewModel
-    lateinit var itemAdapter: RVAdapter
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var viewModel: MainViewModel
+    private lateinit var itemAdapter: RVAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater).also { setContentView(it.root) }
         setupRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
-
+        viewModel.itemList.observe(this){
+            itemAdapter.itemList = it
+        }
     }
 
-    fun setupRecyclerView(){
+    private fun setupRecyclerView(){
         val rvItemList = findViewById<RecyclerView>(R.id.recycler_view)
-
         with(rvItemList){
             itemAdapter = RVAdapter()
             adapter = itemAdapter
-
         }
     }
 }
