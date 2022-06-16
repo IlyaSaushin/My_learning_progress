@@ -1,6 +1,4 @@
 <resources>
     <string name="app_name">My learning progress</string>
-    <string name="hours_learned_string">Hours learned</string>
-    <string name="hours_per_day">Hours per day average</string>
-    <string name="add_learning_hour">Add an hour</string>
+    <string name="item_text">Item</string>
 </resources>
