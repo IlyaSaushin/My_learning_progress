@@ -11,12 +11,9 @@ class MainViewModel: ViewModel() {
     val repository = ItemListRepositoryImpl
     val getItemListUseCase = GetItemListUseCase(repository)
     val itemList = getItemListUseCase.getItemList()
-    val deleteItemUseCase = DeleteItemUseCase(repository)
-    val addItemUseCase = AddItemUseCase(repository)
 
     fun deleteItem(item: Item){
         repository.deleteItem(item)
     }
-
 
 }
