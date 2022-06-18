@@ -3,8 +3,12 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/drawable/item_design.xml" value="0.185" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/layout/activity_add_item.xml" value="0.24010416666666667" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/layout/activity_add_or_change.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/layout/activity_main.xml" value="0.25416666666666665" />
         <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/layout/item_design.xml" value="0.25416666666666665" />
+        <entry key="..\:/Users/User/AndroidStudioProjects/Mylearningprogress/app/src/main/res/layout/show_item_activity.xml" value="0.25416666666666665" />
       </map>
     </option>
   </component>

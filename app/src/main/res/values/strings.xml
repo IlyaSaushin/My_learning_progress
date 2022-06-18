@@ -1,4 +1,7 @@
 <resources>
     <string name="app_name">My learning progress</string>
     <string name="item_text">Item</string>
+    <string name="add_name_of_technology">Название технологии</string>
+    <string name="button_example">Посмотреть пример использования</string>
+    <string name="button_save">Сохранить</string>
 </resources>
