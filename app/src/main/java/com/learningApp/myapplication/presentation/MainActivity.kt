@@ -21,7 +21,7 @@ class MainActivity : AppCompatActivity() {
         setupRecyclerView()
         viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
         viewModel.itemList.observe(this){
-            itemAdapter.itemList = it
+            itemAdapter.submitList(it)
         }
         binding.buttonAdd.setOnClickListener {
             val intent = Intent(this, AddItemActivity::class.java)
@@ -53,7 +53,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = itemAdapter.itemList[viewHolder.adapterPosition]
+                val item = itemAdapter.currentList[viewHolder.adapterPosition]
                 viewModel.deleteItem(item)
             }
         }
