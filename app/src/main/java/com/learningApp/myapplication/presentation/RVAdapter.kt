@@ -14,7 +14,6 @@ import com.learningApp.myapplication.domain.Item
 class RVAdapter: RecyclerView.Adapter<RVAdapter.ItemViewHolder>() {
 
     var count = 0
-    private var authID = 0
     var itemList = listOf<Item>()
         set(value) {
             field = value

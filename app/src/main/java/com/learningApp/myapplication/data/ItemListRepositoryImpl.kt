@@ -13,8 +13,8 @@ object ItemListRepositoryImpl: ItemListRepository {
     private val itemListLD = MutableLiveData<List<Item>>()
 
     init {
-        for (i in 0 until 50){
-            val item = Item("Item $i", i)
+        for (i in 0 until 10){
+            val item = Item("Item $i")
             addItem(item)
         }
     }

@@ -1,5 +1,7 @@
 package com.learningApp.myapplication.presentation
 
+import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -16,15 +18,21 @@ class AddItemViewModel: ViewModel() {
     val shouldCloseScreen: LiveData<Unit>
     get() = _shouldCloseScreen
 
-    fun addItem(inputName: String){
-        if (inputName.isNotBlank()){
+
+
+
+    fun addItem(inputName: String?){
+        if (!inputName.isNullOrEmpty()){
             val item = Item(inputName)
-            return addItemUseCase.addItem(item)
+            Log.d("tag", item.toString())
+            addItemUseCase.addItem(item)
+            finishWork()
         }
-        finishWork()
     }
 
     private fun finishWork(){
         _shouldCloseScreen.value = Unit
+        Log.d("tag", "secondviewmodel finished")
     }
+
 }
