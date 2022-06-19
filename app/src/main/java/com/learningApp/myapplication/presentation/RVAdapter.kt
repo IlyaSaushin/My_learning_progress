@@ -9,7 +9,20 @@ import androidx.recyclerview.widget.RecyclerView
 import com.learningApp.myapplication.R
 import com.learningApp.myapplication.domain.Item
 
-class RVAdapter: ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemListDiffCallBack()) {
+interface ItemClickListener{
+    fun onItemDetails(item: Item)
+}
+
+
+class RVAdapter(private val itemClickListener: ItemClickListener)
+    : ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemListDiffCallBack()),
+        View.OnClickListener {
+
+
+    override fun onClick(v: View) {
+        val item = v.tag as Item
+        itemClickListener.onItemDetails(item)
+    }
 
     class ItemViewHolder(view: View) : RecyclerView.ViewHolder(view){
         val itemName = view.findViewById<TextView>(R.id.item_text)
@@ -18,12 +31,14 @@ class RVAdapter: ListAdapter<Item, RVAdapter.ItemViewHolder>(ItemListDiffCallBac
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_design, parent, false)
+            view.setOnClickListener(this)
         return ItemViewHolder(view)
     }
 
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
         val item = getItem(position)
         viewHolder.itemName.text = item.name
+        viewHolder.itemView.tag = item
     }
 
 }
