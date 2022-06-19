@@ -8,6 +8,7 @@ import com.learningApp.myapplication.domain.GetItemListUseCase
 import com.learningApp.myapplication.domain.Item
 
 class MainViewModel: ViewModel() {
+
     val repository = ItemListRepositoryImpl
     val getItemListUseCase = GetItemListUseCase(repository)
     val itemList = getItemListUseCase.getItemList()
