@@ -19,8 +19,6 @@ class AddItemViewModel: ViewModel() {
     get() = _shouldCloseScreen
 
 
-
-
     fun addItem(inputName: String?){
         if (!inputName.isNullOrEmpty()){
             val item = Item(inputName)
