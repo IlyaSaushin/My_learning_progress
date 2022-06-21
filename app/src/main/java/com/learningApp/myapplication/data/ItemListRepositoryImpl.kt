@@ -13,7 +13,7 @@ object ItemListRepositoryImpl: ItemListRepository {
     private val itemListLD = MutableLiveData<List<Item>>()
 
     init {
-        for (i in 0 until 10){
+        for (i in 0 until 30){
             val item = Item("Item $i")
             addItem(item)
         }
@@ -33,10 +33,22 @@ object ItemListRepositoryImpl: ItemListRepository {
     }
 
     override fun getItemList(): LiveData<List<Item>> {
+        updateList()
         return itemListLD
     }
 
     private fun updateList(){
         itemListLD.value = itemList.toList()
+    }
+
+    override fun editItem(item: Item, newName: String) {
+        item.name = newName
+        updateList()
+    }
+
+    override fun getItemById(id: Int): Item {
+        return itemList.find {
+            it.id == id
+        } ?: throw RuntimeException("Item with this id: $id did not found :_(")
     }
 }

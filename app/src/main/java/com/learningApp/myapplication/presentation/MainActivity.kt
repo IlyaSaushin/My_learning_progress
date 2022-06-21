@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.appcompat.app.AppCompatActivity
@@ -41,6 +42,8 @@ class MainActivity : AppCompatActivity() {
                 override fun onItemDetails(item: Item) {
                     val intent = Intent(context, ShowItemActivity::class.java)
                     intent.putExtra("item_name", item.name)
+                    intent.putExtra("item_id", item.id)
+//                    Log.d("tag", "item id sent - ${item.id}")
                     resultLauncher.launch(intent)
                 }
             })
@@ -74,8 +77,13 @@ class MainActivity : AppCompatActivity() {
 
     private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
             if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-                val name = result.data?.getStringExtra("item_name2")
-                Toast.makeText(this, name.toString(), Toast.LENGTH_SHORT).show()
+                val name = result.data?.getStringExtra("item_name2").toString()
+//                val itemId = result.data?.getIntExtra("item_id", -1)
+                Log.d("tag", "item name got - $name")
+//                val item = itemAdapter.currentList.filter{it.id == itemId}.component1()
+//                Log.d("tag", item.name)
+
+//                viewModel.editItem(item, name)
             } else {
                 Log.d("tag", "result is null")
         }
