@@ -4,4 +4,7 @@
     <string name="add_name_of_technology">Название технологии</string>
     <string name="button_example">Посмотреть пример использования</string>
     <string name="button_save">Сохранить</string>
+    <string name="main_activity">My stack</string>
+    <string name="Technology">Technology</string>
+    <string name="New_technology">New technology</string>
 </resources>
