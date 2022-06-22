@@ -1,5 +1,6 @@
 package com.learningApp.myapplication.presentation
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -30,6 +31,7 @@ class RVAdapter(private val itemClickListener: ItemClickListener)
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ItemViewHolder {
+        Log.d("tag", " CVH created")
         val view = LayoutInflater.from(parent.context).inflate(
             R.layout.item_design, parent, false)
             view.setOnClickListener(this)
@@ -37,6 +39,7 @@ class RVAdapter(private val itemClickListener: ItemClickListener)
     }
 
     override fun onBindViewHolder(viewHolder: ItemViewHolder, position: Int) {
+        Log.d("tag", " BVH created")
         val item = getItem(position)
         viewHolder.itemName.text = item.name
         viewHolder.itemView.tag = item
