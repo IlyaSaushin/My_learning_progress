@@ -20,12 +20,5 @@ class MainViewModel: ViewModel() {
     fun deleteItem(item: Item){
         repository.deleteItem(item)
     }
-//
-//    fun editItem(item: Item, newName: String){
-//            repository.editItem(item, newName)
-//    }
-//
-//    fun getItemById(id: Int){
-//        val item = getItemByIdUseCase.getItemById(id)
-//    }
+
 }

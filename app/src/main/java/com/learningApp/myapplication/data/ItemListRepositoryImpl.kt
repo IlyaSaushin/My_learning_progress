@@ -42,7 +42,10 @@ object ItemListRepositoryImpl: ItemListRepository {
     }
 
     override fun editItem(item: Item, newName: String) {
-        item.name = newName
+        val oldItem = getItemById(item.id)
+        itemList.remove(oldItem)
+        addItem(item)
+//        item.name = newName
         updateList()
     }
 

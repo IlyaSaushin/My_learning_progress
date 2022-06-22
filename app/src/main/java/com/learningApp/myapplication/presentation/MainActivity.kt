@@ -40,11 +40,12 @@ class MainActivity : AppCompatActivity() {
         with(rvItemList){
             itemAdapter = RVAdapter(object : ItemClickListener{
                 override fun onItemDetails(item: Item) {
+
+                    // Добавление интента на второе активити
                     val intent = Intent(context, ShowItemActivity::class.java)
                     intent.putExtra("item_name", item.name)
                     intent.putExtra("item_id", item.id)
-//                    Log.d("tag", "item id sent - ${item.id}")
-                    resultLauncher.launch(intent)
+                    startActivity(intent)
                 }
             })
             adapter = itemAdapter
@@ -75,17 +76,4 @@ class MainActivity : AppCompatActivity() {
         itemTouchHelper.attachToRecyclerView(itemList)
     }
 
-    private var resultLauncher = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-            if (result.resultCode == Activity.RESULT_OK && result.data != null) {
-                val name = result.data?.getStringExtra("item_name2").toString()
-//                val itemId = result.data?.getIntExtra("item_id", -1)
-                Log.d("tag", "item name got - $name")
-//                val item = itemAdapter.currentList.filter{it.id == itemId}.component1()
-//                Log.d("tag", item.name)
-
-//                viewModel.editItem(item, name)
-            } else {
-                Log.d("tag", "result is null")
-        }
-    }
 }

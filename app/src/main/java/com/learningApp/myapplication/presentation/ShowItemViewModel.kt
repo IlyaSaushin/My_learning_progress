@@ -20,11 +20,11 @@ class ShowItemViewModel: ViewModel() {
 
     fun editItem(item: Item, newName: String){
         _item.value?.let {
-            val item = it.copy(name = newName)
-//            editItemUseCase.editItem(item, newName)
+            val newItem = it.copy(name = newName)
+            editItemUseCase.editItem(newItem, newName)
+
         }
-        editItemUseCase.editItem(item, newName)
-//        repository.editItem(item, newName)
+//        editItemUseCase.editItem(item, newName)
     }
 
     fun getItemById(id: Int){
