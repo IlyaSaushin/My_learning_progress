@@ -1,17 +1,14 @@
 package com.learningApp.myapplication.presentation
 
 import android.util.Log
-import android.widget.Toast
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.*
 import com.learningApp.myapplication.data.ItemListRepositoryImpl
 import com.learningApp.myapplication.domain.AddItemUseCase
 import com.learningApp.myapplication.domain.Item
+import kotlinx.coroutines.launch
 
-class AddItemViewModel: ViewModel() {
+class AddItemViewModel(private val repository: ItemListRepositoryImpl): ViewModel() {
 
-    private val repository = ItemListRepositoryImpl
     private val addItemUseCase = AddItemUseCase(repository)
 
     private val _shouldCloseScreen =  MutableLiveData<Unit>()
@@ -19,7 +16,7 @@ class AddItemViewModel: ViewModel() {
     get() = _shouldCloseScreen
 
 
-    fun addItem(inputName: String?){
+    suspend fun addItem(inputName: String?){
         if (!inputName.isNullOrEmpty()){
             val item = Item(inputName)
             Log.d("tag", item.toString())
@@ -29,8 +26,19 @@ class AddItemViewModel: ViewModel() {
     }
 
     private fun finishWork(){
-        _shouldCloseScreen.value = Unit
+        viewModelScope.launch {
+            _shouldCloseScreen.value = Unit
+        }
         Log.d("tag", "secondviewmodel finished")
     }
 
+}
+
+class AddItemViewModelFactory(private val repository: ItemListRepositoryImpl) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(AddItemViewModel::class.java)) {
+            return AddItemViewModel(repository) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
+    }
 }

@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 
 class GetItemListUseCase(private val itemListRepository: ItemListRepository) {
 
-    fun getItemList(): LiveData<List<Item>>{
-        return itemListRepository.getItemList()
-    }
+//    fun getItemList(): LiveData<List<Item>>{
+//        return itemListRepository.getItemList()
+//    }
 
 }
