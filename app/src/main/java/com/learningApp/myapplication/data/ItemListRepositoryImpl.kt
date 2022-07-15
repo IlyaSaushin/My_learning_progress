@@ -1,57 +1,30 @@
 package com.learningApp.myapplication.data
 
-import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import com.learningApp.myapplication.data.dao.ItemListDao
 import com.learningApp.myapplication.domain.Item
 import com.learningApp.myapplication.domain.Item.Companion.UNDEFINED_ID
 import com.learningApp.myapplication.domain.ItemListRepository
+import kotlinx.coroutines.flow.Flow
 
-object ItemListRepositoryImpl: ItemListRepository {
+class ItemListRepositoryImpl(private val itemDao: ItemListDao): ItemListRepository {
 
-    private val itemList = sortedSetOf<Item>({o1, o2 -> o1.id.compareTo(o2.id)})
-    private var autoIncrementedId = 0
-    private val itemListLD = MutableLiveData<List<Item>>()
+    val items: Flow<List<Item>> = itemDao.getItemList()
 
-    init {
-        for (i in 0 until 30){
-            val item = Item("Item $i")
-            addItem(item)
-        }
+    override suspend fun addItem(item: Item) {
+        itemDao.addItem(item)
     }
 
-    override fun addItem(item: Item) {
-        if (item.id == UNDEFINED_ID){
-            item.id = autoIncrementedId++
-        }
-        itemList.add(item)
-        updateList()
+    override suspend fun deleteItem(item: Item) {
+        itemDao.deleteItem(item)
     }
 
-    override fun deleteItem(item: Item) {
-        itemList.remove(item)
-        updateList()
+    override suspend fun editItem(item: Item, newName: String) {
+        itemDao.updateItem(item.id, newName)
+
     }
 
-    override fun getItemList(): LiveData<List<Item>> {
-        updateList()
-        return itemListLD
-    }
-
-    private fun updateList(){
-        itemListLD.value = itemList.toList()
-    }
-
-    override fun editItem(item: Item, newName: String) {
-        val oldItem = getItemById(item.id)
-        itemList.remove(oldItem)
-        addItem(item)
-//        item.name = newName
-        updateList()
-    }
-
-    override fun getItemById(id: Int): Item {
-        return itemList.find {
-            it.id == id
-        } ?: throw RuntimeException("Item with this id: $id did not found :_(")
+    override suspend fun getItemById(id: Int): Item {
+        return itemDao.getItemById(id)
     }
 }
